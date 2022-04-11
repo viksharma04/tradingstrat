@@ -1,0 +1,47 @@
+---
+title: "Literature Review"
+author: "Vik Sharma"
+date: "3/30/2022"
+output: pdf_document
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Papers on Trend Following 
+
+[@ClareSeatonThomas2012]
+
+The authors test whether a simple trend following strategy can outperform a buy 
+and hold strategy on the S&P500. They alter the complexity of rules, trading
+frequency, and risk management rules, of the underlying strategy and analyze
+whether the modifications can improve returns. Finally, the technical strategy 
+is compared with strategies that use fundamental metrics. 
+
+The authors analyze the following types of indicators:
+
+1) Simple movig averages (10 to 450 day SMA analyzed)
+
+2) Moving average crossover (25/50 to 150/350 day crossovers analyzed)
+
+3) Breakout signals - index value at a 'x' day high (x ranges from 10 to 450)
+
+The authors find that:
+
+i) simple indicators and signals such as the 200 day SMA dominate the long only
+investment strategy, 
+
+ii) monthly trading frequency is superior to any higher trading frequencies, 
+
+iii) there is no benefit to using stop-loss rules, 
+
+iv) there is no evidence suggesting that fundamental metrics provide superior
+trading signals than technical indicators. 
+
+
+
+
+
+

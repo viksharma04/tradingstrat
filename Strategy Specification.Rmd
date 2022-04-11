@@ -1,0 +1,37 @@
+---
+title: "Strategy Specification Document"
+author: "Vik Sharma" 
+date: "3/30/2022"  
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Business Context and Objectives 
+
+## Constraints 
+
+## Objectives 
+
+## Benchmarks 
+
+# Hypothesis for the strategy 
+
+# Testing the Hypothesis 
+
+# Componenets of the strategy 
+
+## Filters 
+
+## Indicators 
+
+## Signals 
+
+## Rules 
+
+# Initial Parameters 
+
+# Data Requirements 
+
