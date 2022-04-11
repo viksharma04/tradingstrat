@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Papers on Trend Following 
 
-[@ClareSeatonThomas2012]
+##**[@ClareSeatonThomas2012] - Breaking into the blackbox**
 
 The authors test whether a simple trend following strategy can outperform a buy 
 and hold strategy on the S&P500. They alter the complexity of rules, trading
@@ -41,6 +41,60 @@ iv) there is no evidence suggesting that fundamental metrics provide superior
 trading signals than technical indicators. 
 
 
+##**[@lo2000foundations] - Foundations of Technical Analysis** 
+
+The authors analyze a systematic and automatic approach to technical analysis 
+using nonparametric kernel regression. They apply this method to a large number 
+of US stocks from 1962 to 1996. They compare the unconditional empirical 
+distribution of stock returns to the conditional distribution, conditional to 
+specific technical 'patterns' such as 'head and shoulders' and 'double bottom'. 
+They find that several technical indicators provide incremental information and 
+may have practical value. 
+
+1) The authors estimate the nonlinear relationship between time and prices using 
+the following equation: 
+
+$$ P_{t} = m(X_{t}) + \epsilon_t $$
+*$X_{t}$ is a state variable, which, in this case, is set equal to time* 
+
+2) Smoothing Estimators try to smooth the noise out to identify historical 
+patterns. Nadaraya-Watson kernel estimator is used to generate an estimate 
+($\hat{m}(.)$) of true underlying price history (${P_{t}}$)
+
+3) Automated technical algorithm 
+a) Define technical patterns in terms of geometric properties 
+b) Construct kernel estimator ($\hat{m}(.)$) to numerically identify geometric 
+properties 
+c) Analyze ($\hat{m}(.)$) for occurences of each technical indicator 
+
+The authors conclude that: 
+
+i) 7/10 technical patterns analyzed provide incremental information, especially 
+on Nasdaq stocks. However, this does not necessarily imply that the information 
+can be successfully used to generate excess trading profits. 
+
+ii) It may be possible to detect 'optimal' patterns to predict phenomena in a 
+financial time series, for e.g. a change in regime. 
+
+**[@bruder2011trend] - Trend Filtering Methods for Momentum Strategies**
+
+The paper analyzes different trend filtering methods and their advantages and 
+disadvantages. Trend filtering methods studied include: 
+
+1) Linear Methods 
+a) Convolution representation - A linear trend kernel is applied to the time 
+series to extract a smoother time series 
+b) Measuring Trend and it's derivative - Apply the black schoeles model and 
+Brownian motion
+c) Moving average filters 
+d) Least squares filters 
+
+2) Non-linear Methods 
+a) Non-parametric regression - Kernel regression, Loess regression, Spline 
+regression, local polynomial regression
+b) L1 filter - Hodrick-Prescott generalization
+c) Wavelet filtering - Fourier transformation 
+d) Other methods - singular spectrum analysis, support vector machines, empirical mode decomposition 
 
 
 

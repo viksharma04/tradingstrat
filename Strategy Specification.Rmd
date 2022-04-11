@@ -13,9 +13,41 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Constraints 
 
+The strategy is meant to be a trend/momentum trading strategy for individual 
+investors that should be manually executable. 
+
+1) Only trading highly liquid securities (Individual investors should have 
+access and orders should fill easily) - For the purposes of this strategy we 
+will focus on major indices like the S&P500 and NASDAQ 100. Further analysis 
+is done on major market indices of other countries. 
+
+2) Trading frequency should not be too high. (A passive investor should be 
+able to regularly check the strategy performance and make allocation decisions.
+The active investor should be able to execute the strategy in real time which
+means no more than a few signals every day). 
+
+3) Strategy should be immune to price changes upto 0.5% from the time when a 
+signal is generated. (To allow sufficient time to fill an order).
+
+4) Data required for the strategy should be easily and freely available. 
+
 ## Objectives 
 
+The objective of the strategy is to outperform a buy-and-hold strategy on 
+a monthly basis. The hypothetical investor is assumed to be invested in the 
+broader market in a diversified manner and allocates a small portion of their 
+capital to a trend strategy (the strategy should ideally serve as a hedge 
+against a decline in the broader market) 
+
+1) Maximize monthly performance against the S&P 500. 
+2) Drawdown no greater than 20% of total portfolio amount (slightly higher risk 
+appetite).  
+3) Provide positive return in a high downward volatility regime. 
+
 ## Benchmarks 
+
+1) Monthly % outperformance against the S&P500 
+
 
 # Hypothesis for the strategy 
 
