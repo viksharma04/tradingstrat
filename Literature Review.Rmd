@@ -96,6 +96,35 @@ b) L1 filter - Hodrick-Prescott generalization
 c) Wavelet filtering - Fourier transformation 
 d) Other methods - singular spectrum analysis, support vector machines, empirical mode decomposition 
 
+[https://tradersbulletin.co.uk/combining-trend-following-and-mean-reversion/](Combining trend and mean reversion)
 
+Grundy and McNichols (1989) and Blume, Easley,
+and O’Hara (1994) show that trading volume can provide useful information beyond prices
 
+Hong and Stein (1999) explain that, at the
+start of a trend, investors underreact to news; as the market rises, investors subsequently overreact,
+leading to even higher prices.
 
+**Market timing with moving averages:**
+Summing up the results presented above, all technical trading indicators considered in this
+paper are computed in the same general manner. We nd, for instance, that the computation
+of every technical trading indicator can be interpreted as the computation of a weighted average
+of the momentum rules computed using different averaging periods. Thus, the momentum rule
+might be considered as an elementary trading rule on the basis of which one can construct
+more elaborate rules.
+
+equal weighting of price changes (as in the MOM rule), underweighting the most old price changes (as in the P-MA
+rule or in the most .MA rules), and underweighting both the most recent and the most old
+price changes (as in the DCM)
+
+For practitioners, it is comforting to know that the popular DCM rule, where one
+uses 50-day and 200-day simple moving averages, is very close to the best performing rule for
+timing the Standard and Poor's 500 index.
+
+Zakamulin (2015) entertains a method of nding
+the most robust moving average weighting scheme, where \robustness" of a weighting scheme
+is dened as its ability to generate sustainable performance under all possible market scenarios
+regardless of the size of the averaging window. He nds that the CV-EMA weighting scheme
+with a decay factor of 0.85-0.90 produces the most robust performance.
+
+# Papers on Mean Reversion 

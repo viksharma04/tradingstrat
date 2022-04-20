@@ -1,0 +1,182 @@
+---
+title: "Skeleton"
+author: "Vik Sharma"
+date: "4/15/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Skeleton in quantstrat
+```{r}
+library(quantstrat)
+```
+
+## Barebones 
+```{r}
+# Create initdate, from, and to strings
+initdate <- "1983-01-01"
+from <- "1985-01-01"
+to <- "1995-12-31"
+
+# Set the timezone to UTC
+Sys.setenv(TZ = "UTC")
+
+# Set the currency to USD 
+currency("USD")
+
+# Retrieve SPY from yahoo
+getSymbols("AAPL", from = from, to = to, src="yahoo", adjust = FALSE)
+
+# Use stock() to initialize SPY and set currency to USD
+stock("AAPL", currency = "USD")
+
+# Define your trade size and initial equity
+tradesize <- 100000
+initeq <- 100000
+
+# Define the names of your strategy, portfolio and account
+strategy.st <- "firststrat"
+portfolio.st <- "firststrat"
+account.st <- "firststrat"
+
+# Remove the existing strategy if it exists
+rm.strat(strategy.st)
+
+# Initialize the portfolio
+initPortf(portfolio.st, symbols = "AAPL", initDate = initdate, currency = "USD")
+
+# Initialize the account
+initAcct(account.st, portfolios = portfolio.st, initDate = initdate, currency = "USD", initEq = initeq)
+
+# Initialize the orders
+initOrders(portfolio.st, initDate = initdate)
+
+# Store the strategy
+strategy(strategy.st, store = TRUE)
+```
+## Adding indicators 
+```{r}
+add.indicator(strategy = strategy.st, 
+              
+              # Add the indicator function
+              name = "EMA", 
+              
+              # Create a lookback period
+              arguments = list(x = quote(Cl(mktdata)), n=20), 
+              
+              # Label your indicator 
+              label = "20EMA")
+
+add.indicator(strategy = strategy.st, 
+              
+              # Add the indicator function
+              name = "EMA", 
+              
+              # Create a lookback period
+              arguments = list(x = quote(Cl(mktdata)), n=50), 
+              
+              # Label your indicator 
+              label = "50EMA")
+
+# Use applyIndicators to test out your indicators
+test <- applyIndicators(strategy = strategy.st, mktdata = OHLC(AAPL))
+
+# Subset your data between Sep. 1 and Sep. 5 of 2013
+test_subset <- test["1986-01-01/1987-12-31"]
+plot(test_subset[,c(1,5,6)])
+```
+
+## Signals
+```{r}
+# Add a sigComparison which specifies that SMA50 must be greater than SMA200, call it longfilter
+add.signal(strategy.st, name = "sigComparison", 
+           
+           # We are interested in the relationship between the SMA50 and the SMA200
+           arguments = list(columns = c("20EMA", "50EMA"), 
+                            
+                            # Particularly, we are interested when the SMA50 is greater than the SMA200
+                            relationship = "gt"),
+           
+           # Label this signal longfilter
+           label = "longfilter")
+
+# Add a sigCrossover which specifies that the SMA50 is less than the SMA200 and label it filterexit
+add.signal(strategy.st, name = "sigCrossover",
+           
+           # We're interested in the relationship between the SMA50 and the SMA200
+           arguments = list(columns = c("20EMA", "50EMA"),
+                            
+                            # The relationship is that the SMA50 crosses under the SMA200
+                            relationship = "lt"),
+           
+           # Label it filterexit
+           label = "filterexit")
+```
+## Apply Indicators and Signals 
+```{r}
+test_init <- applyIndicators(strategy.st, mktdata = OHLC(AAPL))
+test <- applySignals(strategy = strategy.st, mktdata = test_init)
+```
+
+## Applying rules 
+```{r}
+# exit if SMA50 below SMA 200
+add.rule(strategy.st, name = "ruleSignal", 
+         arguments = list(sigcol = "filterexit", sigval = TRUE, orderqty = "all", 
+                        ordertype = "market", orderside = "long", 
+                        replace = FALSE, prefer = "Open"), 
+         type = "exit")
+
+add.rule(strategy.st, name = "ruleSignal",
+
+         # Use the longentry column as the sigcol
+         arguments=list(sigcol = "longfilter",
+
+                        # Set sigval to TRUE
+                        sigval = TRUE,
+
+                        # Set orderqty to 1
+                        orderqty = 1,
+
+                        # Use a market type of order
+                        ordertype = "market",
+
+                        # Take the long orderside
+                        orderside = "long",
+
+                        # Do not replace other signals
+                        replace = FALSE,
+
+                        # Buy at the next day's opening price
+                        prefer = "Open"),
+
+         # This is an enter type rule, not an exit
+         type = "enter")
+```
+
+
+
+## Applying the strategy 
+```{r}
+# Use applyStrategy() to apply your strategy. Save this to out
+out <- applyStrategy(strategy = strategy.st, portfolios = portfolio.st)
+
+# Update your portfolio (portfolio.st)
+updatePortf(portfolio.st)
+daterange <- time(getPortfolio(portfolio.st)$summary)[-1]
+
+# Update your account (account.st)
+updateAcct(account.st, daterange)
+updateEndEq(account.st)
+
+# Get the tradeStats for your portfolio
+tstats <- tradeStats(Portfolios = portfolio.st)
+
+# Print the profit factor
+tstats$Profit.Factor
+tstats
+```
+

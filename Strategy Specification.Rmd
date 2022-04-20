@@ -46,8 +46,8 @@ appetite).
 
 ## Benchmarks 
 
-1) Monthly % outperformance against the S&P500 
-
+1) Monthly % performance against the S&P500 
+2) Performance against a pure momentum portfolio
 
 # Hypothesis for the strategy 
 
